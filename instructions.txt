@@ -1,0 +1,11 @@
+
+Welcome to Hangman Lite!
+===================================
+The rules are simple. You can use:           
+1. Characters a to z only.
+2. One character at a time.
+3. You have 10 guesses.
+4. Wrong guess = one guess used.
+
+When you are ready, begin below.
+___________________________________
