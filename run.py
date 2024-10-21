@@ -88,7 +88,7 @@ def game_over(selected_word, attempts_left):
     Summary of game when lost.
     """
     print("==============================================")
-    print("               G A M E O V E R ")
+    print("               G A M E  O V E R ")
     print("                Attempts left: 0")
     print(f"              The word was: {selected_word}")    
     print("==============================================")
@@ -114,6 +114,7 @@ def play_hangman():
     Cycle will run till either the word is found or attempts
     are used up.
     """
+    display_instructions()
     selected_word = choose_random_word()
     word_mask = mask_selected_word(selected_word)
     duplicate_values = []      
