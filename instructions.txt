@@ -4,8 +4,6 @@ Welcome to Hangman Lite!
 The rules are simple. You can use:           
 1. letters a to z only.
 2. One letter at a time.
-3. You have 10 guesses.
-4. Wrong guess = one guess used.
-
-When you are ready, begin below.
+3. You have 10 attempts.
+4. Wrong guess = one attempt used.
 ___________________________________

@@ -24,6 +24,16 @@ def choose_random_word():
     choose_word = random.choice(word_list)
     return choose_word
 
+def mask_selected_word(selected_word):
+    """
+    mask the letters in the randomly selected 
+    word with _
+    """
+    word_mask = []
+    for letter in selected_word:
+        word_mask.append(letter.replace(letter,'_'))
+    return word_mask
+
 def get_user_input():
     """
     take and return the input from the user as lower
@@ -41,11 +51,22 @@ def input_validation(user_input):
         print("You didn't input anything.")
         return False
 
+    elif len(user_input) > 1:
+        print("Only one letter allowed!")
+        return False 
+
     elif not user_input.isalpha():
         print("Invalid: Enter a letter between a to z.")
         return False
-    return True
+    return True    
 
+def game_over(selected_word, attempts_left):
+    print("==============================================")
+    print("               G A M E O V E R ")
+    print("               Attempts left: 0")
+    print("                The word was:")
+    print(f"                  {selected_word}")
+    print("==============================================\n")
 
 def play_hangman():
     """
@@ -57,45 +78,44 @@ def play_hangman():
     Cycle will run till either the word is found or attempts
     are used up.
     """
-
     selected_word = choose_random_word()
-    duplicate_values = []   
-    word_mask = []
+    word_mask = mask_selected_word(selected_word)
+    duplicate_values = []      
     attempts_left = 10
-    display_instructions()
+    print("\n")
     print(selected_word)
 
-    for letter in selected_word:
-        word_mask.append(letter.replace(letter,'_')) 
-    
     while attempts_left > 0:
-        print(f"Letters: {len(selected_word)}")
-        print(" ".join(word_mask)) 
+        print("type 'help' for instructions")        
+        print(" ".join(word_mask)+"\n")
+        print(f"Letters: {len(selected_word)}")         
         user_input  = get_user_input()
+
+        if user_input =="help":
+            display_instructions()
+            continue
        
-        if input_validation(user_input):
+        elif input_validation(user_input):
             if user_input in duplicate_values:
                 print(f"'{user_input}' has already been tried.")
                 continue
-            elif user_input in selected_word: 
-                print(f"Good Guess. You found {user_input} in the word")               
+            duplicate_values.append(user_input)
+
+            if user_input in selected_word: 
+                print(f"Good Guess. You found '{user_input}' in the word")               
                 for i in range(len(selected_word)):
                     if selected_word[i] == user_input:
                         word_mask[i] = user_input                     
-                if word_mask.count('_') == 0 :
+                if word_mask.count('_') == 0:
                     print("Well Done, you found it!")
                     print(f"Attempts left: {attempts_left}")                     
                     break            
             else:
                 print(f"Incorrect. '{user_input}' is not in the word. Try again!")
                 attempts_left -=1
-                print(f"Attempts left: {attempts_left}\n")
-        duplicate_values.append(user_input) 
-    
+                print(f"Attempts left: {attempts_left}")
+           
     if attempts_left == 0:
-        print("Game over!")
-        print(f"the word was: {selected_word}")
-        
-       
-#display_instructions()
+       game_over(selected_word, attempts_left)
+
 play_hangman()
