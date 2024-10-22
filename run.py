@@ -103,6 +103,34 @@ def game_won(selected_word, attempts_left):
     print(f"            The word was: {selected_word}")    
     print("===============================================")
 
+def set_difficulty():
+    """
+    Take valid input for the difficulty level and return it as a value
+    ready for the play hangman function to use.
+
+    For the purpose of this game the following attempt values are used:
+    easy = 12, medium = 8, hard = 4
+    """
+    print("Choose your difficulty:")
+    print("1 = easy, 2 = medium, 3 = hard") 
+    difficulty_list = [1,2,3]     
+    while True:
+        try:
+            difficulty = (get_user_input())
+            if difficulty == "1":
+                attempts_left = 12                
+            elif difficulty == "2":
+                attempts_left = 8                
+            elif difficulty == "3":
+                attempts_left = 4
+            elif not difficulty in difficulty_list:
+                print("Invalid. 1 = easy, 2 = medium, 3 = hard")
+                continue                  
+        except:
+            print("Invalid. 1 = easy, 2 = medium, 3 = hard")
+            continue
+        else:
+            return attempts_left      
 
 def play_hangman():
     """
@@ -115,12 +143,12 @@ def play_hangman():
     are used up.
     """
     display_instructions()
+    attempts_left = set_difficulty()    
     selected_word = choose_random_word()
     word_mask = mask_selected_word(selected_word)
-    duplicate_values = []      
-    attempts_left = 10  
-    print("\n")
-    print(selected_word)
+    duplicate_values = []          
+    print(selected_word) # remove in final version!
+    print(f"Total Attempts: {attempts_left}")
 
     while attempts_left > 0:             
         print(" ".join(word_mask)+"\n")
