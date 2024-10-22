@@ -142,7 +142,7 @@ def play_hangman():
                     #play_hangman()
                     break           
             else:
-               letter_not_found(user_input, attempts_left)           
+               attempts_left = letter_not_found(user_input, attempts_left)           
     if attempts_left == 0:         
         lost = game_over(selected_word, attempts_left)
         #play_hangman()
