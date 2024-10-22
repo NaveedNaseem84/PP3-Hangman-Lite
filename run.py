@@ -22,7 +22,7 @@ def choose_random_word():
     a word from this list
     """
     file = open("words.txt", 'r')
-    words = file.read()
+    words = file.read().lower()
     word_list = words.split("\n")
     file.close()
     choose_word = random.choice(word_list)
